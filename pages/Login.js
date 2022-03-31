@@ -1,12 +1,11 @@
-import React from 'react';
+import React from 'react'
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 
-export default class App extends React.Component {
+export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-          <Text style={styles.logo}>Logo</Text>
-          <Text style={styles.name}>NOM</Text>
+          <Text style={styles.name}>Nom</Text>
           <TouchableOpacity style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
           <Text style={styles.copyright}>Copyright 2022 - 2023 Nom. All rights reserved.</Text>
       </View>
@@ -17,24 +16,22 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
       height: "100%",
-      backgroundColor: '#064A04',
+      backgroundColor: '#f2f2f2',
       flexDirection: 'column', // row
       alignItems: 'center',
       justifyContent: 'center', // center, space-around
       paddingTop: 50,
     },
 
-    logo: {
-        color: 'white'
-    },
-
     name: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
+        fontSize: 25,
+        fontFamily: 'Futura'
     },
 
     copyright: {
-        color: 'white',
+        color: 'black',
         fontSize: 11
     },
 
@@ -50,7 +47,11 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         paddingLeft: 40,
         borderRadius: 8,
-        marginTop: "65%",
-        marginBottom: "70%"
+        marginTop: "70%",
+        marginBottom: "80%",
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.1,
+        shadowRadius: 3
     }
 });
