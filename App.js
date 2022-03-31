@@ -8,11 +8,12 @@
 
 import React from 'react';
 import TopBar from './components/TopBar';
+import Login from './pages/Login'
 
 export default class App extends React.Component {
   render() {
     return (
-      <TopBar />
+      <Login />
     );
   }
 }
