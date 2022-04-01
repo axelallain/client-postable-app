@@ -19,6 +19,7 @@ Du 01-01-22 au 08-01-22 à 10h10`}
           </TouchableOpacity>
           <Text style={styles.delete}>Supprimer cette location</Text>
           
+          <Text style={styles.resume}>0 jours : 0.00€</Text>
           <TouchableOpacity style={styles.submitButton}><Text style={styles.submitText}>VALIDER LA LOCATION</Text></TouchableOpacity>
       </View>
     );
@@ -68,6 +69,10 @@ const styles = StyleSheet.create({
         marginBottom: "7%"
     },
 
+    resume: {
+
+    },
+
     submitButton: {
         backgroundColor: '#42CF02',
         paddingTop: "5%",
@@ -75,7 +80,7 @@ const styles = StyleSheet.create({
         paddingBottom: "5%",
         paddingLeft: "20%",
         borderRadius: 8,
-        marginTop: "8%",
+        marginTop: "5%",
         marginBottom: "0%",
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
