@@ -19,13 +19,17 @@ export default class Login extends React.Component {
     // Sign-in the user with the credential
     const user_sign_in = auth().signInWithCredential(googleCredential);
 
+    user_sign_in.then(re=>{
+      console.log(re);
+    })
+
     console.log((await user_sign_in).user.displayName)
   }
 
   render() {
     return (
       <View style={styles.container}>
-          <Text style={styles.name}></Text>
+          <Text style={styles.name}>Nom</Text>
           <TouchableOpacity title="Google Sign-In" onPress={this.signInWithGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
           <Text style={styles.copyright}>Copyright 2022 - 2023 Nom. All rights reserved.</Text>
       </View>
