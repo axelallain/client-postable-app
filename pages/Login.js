@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
-export default class Login extends React.Component {
+function Login() {
+
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
 
   googleSigninConfigure = GoogleSignin.configure({
     webClientId: '925413629652-a8u0jtl686lcs643qqckq04tbpqfb2al.apps.googleusercontent.com',
@@ -19,27 +23,53 @@ export default class Login extends React.Component {
     // Sign-in the user with the credential
     const user_sign_in = auth().signInWithCredential(googleCredential);
 
+    /*
     user_sign_in.then(re=>{
-      console.log(re);
+      setUser(re); // setState here
     })
+    
 
     console.log((await user_sign_in).user.displayName)
+    */
   }
 
   signOutFromGoogle = async () => {
     auth().signOut().then(() => console.log('User signed out!'));
   }
 
-  render() {
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+  if(!user) {
     return (
       <View style={styles.container}>
           <TouchableOpacity title="Google Sign-In" onPress={this.signInWithGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
-          <Text style={styles.name}>Nom</Text>
+          <Text style={styles.name}>Aucun user connecté</Text>
+          <TouchableOpacity title="Google Sign-In" onPress={this.signOutFromGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se déconnecter</Text></TouchableOpacity>
+          <Text style={styles.copyright}>Copyright 2022 - 2023 Nom. All rights reserved.</Text>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+          <TouchableOpacity title="Google Sign-In" onPress={this.signInWithGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
+          <Text style={styles.name}>{user.displayName}</Text>
           <TouchableOpacity title="Google Sign-In" onPress={this.signOutFromGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se déconnecter</Text></TouchableOpacity>
           <Text style={styles.copyright}>Copyright 2022 - 2023 Nom. All rights reserved.</Text>
       </View>
     );
   }
+  
 }
 
 const styles = StyleSheet.create({
@@ -84,3 +114,5 @@ const styles = StyleSheet.create({
         shadowRadius: 3
     }
 });
+
+export default Login;
