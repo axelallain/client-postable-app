@@ -26,11 +26,16 @@ export default class Login extends React.Component {
     console.log((await user_sign_in).user.displayName)
   }
 
+  signOutFromGoogle = async () => {
+    auth().signOut().then(() => console.log('User signed out!'));
+  }
+
   render() {
     return (
       <View style={styles.container}>
-          <Text style={styles.name}>Nom</Text>
           <TouchableOpacity title="Google Sign-In" onPress={this.signInWithGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
+          <Text style={styles.name}>Nom</Text>
+          <TouchableOpacity title="Google Sign-In" onPress={this.signOutFromGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se déconnecter</Text></TouchableOpacity>
           <Text style={styles.copyright}>Copyright 2022 - 2023 Nom. All rights reserved.</Text>
       </View>
     );
