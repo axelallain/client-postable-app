@@ -1,8 +1,14 @@
 import React from 'react'
 import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import TopBar from '../components/TopBar'
+import { Slider } from "@miblanchard/react-native-slider";
 
 export default class CreateRent extends React.Component {
+    state = {
+        minValue: 3,
+        maxValue: 7
+      };
+
   render() {
     return (
       <View style={styles.container}>
@@ -17,9 +23,14 @@ Ville, Pays
 Du 01-01-22 au 08-01-22 à 10h10`}
               </Text>
           </TouchableOpacity>
-          <Text style={styles.delete}>Supprimer cette location</Text>
+          <Slider
+          minimumValue={this.state.minValue}
+          maximumValue={this.state.maxValue}
+          value={this.state.minValue}
+          onValueChange={value => this.setState({ value })}
+        />
           
-          <Text style={styles.resume}>0 jours : 0.00€</Text>
+          <Text style={styles.resume}>{this.state.value} jours : 0.00€</Text>
           <TouchableOpacity style={styles.submitButton}><Text style={styles.submitText}>VALIDER LA LOCATION</Text></TouchableOpacity>
       </View>
     );
@@ -61,14 +72,6 @@ const styles = StyleSheet.create({
         shadowRadius: 3
     },
 
-    delete: {
-        color: 'red',
-        fontWeight: 'bold',
-        fontSize: 13,
-        marginTop: "8%",
-        marginBottom: "7%"
-    },
-
     resume: {
 
     },
@@ -91,6 +94,6 @@ const styles = StyleSheet.create({
     submitText: {
         color: 'white',
         fontWeight: 'bold'
-    },
+    }
 
 });

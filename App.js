@@ -17,9 +17,10 @@ import RentPage from './pages/RentPage'
 import CreateRent from './pages/CreateRent'
 
 export default class App extends React.Component {
+
   render() {
     return (
-      <CreateRent />
+      <Login />
     );
   }
 }
