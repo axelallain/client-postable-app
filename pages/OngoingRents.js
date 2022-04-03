@@ -6,6 +6,7 @@ import axios from 'axios';
 const OngoingRents = props => {
 
   const axios = require('axios');
+  const [rents, setRents] = useState([])
 
   const getRentsFromApiAsync = async () => {
     const response = await axios.get('http://localhost:8080/rents', {
@@ -14,11 +15,16 @@ const OngoingRents = props => {
         status: 'ongoing'
       }
     });
-    console.log(response.data);
+    setRents(response.data);
+    console.log(rents);
   }
 
+  useEffect(() => {
+    getRentsFromApiAsync();
+  }, []);
+
   return (
-    <View onLayout={() => getRentsFromApiAsync()} style={styles.container}>
+    <View style={styles.container}>
         <Text style={styles.title}>Locations en cours</Text>
         <TouchableOpacity style={styles.TouchableOpacity}>
             <Text style={styles.buttonsText}>
