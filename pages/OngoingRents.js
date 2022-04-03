@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import TopBar from '../components/TopBar'
+import axios from 'axios';
 
 const OngoingRents = props => {
 
-  const queryString = {
-    username: props.route.params.username,
-    status: 'ongoing',
-  };
+  const axios = require('axios');
 
   const getRentsFromApiAsync = async () => {
-    try {
-      const response = await fetch(`http://localhost:8080/rents?${queryString}`);
-      const json = await response.json();
-      console.log(json);
-      return json;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await axios.get('http://localhost:8080/rents', {
+      params: {
+        username: props.route.params.username,
+        status: 'ongoing'
+      }
+    });
+    console.log(response.data);
   }
 
   return (
