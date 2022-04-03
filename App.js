@@ -25,7 +25,10 @@ function App() {
     <NavigationContainer>
       <Navigator>
         <Screen name='Login' component={Login} options={{ headerShown: false }} />
-        <Screen name='Home' component={Home} options={{ title: "Logo", headerBackVisible: false, gestureEnabled: false }} />
+        <Screen name='Home' component={Home} options={{ headerBackVisible: false, gestureEnabled: false }} />
+        <Screen name='Rents' component={Rents} />
+        <Screen name='OngoingRents' component={OngoingRents} />
+        <Screen name='ExpiredRents' component={ExpiredRents} />
       </Navigator>
     </NavigationContainer>
   );

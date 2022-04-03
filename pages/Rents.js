@@ -1,18 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import TopBar from '../components/TopBar'
 
-export default class Rents extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-          <TopBar />
-          <Text style={styles.title}>Mes locations</Text>
-          <TouchableOpacity style={styles.TouchableOpacity}><Text style={styles.buttonsText}>En cours</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.TouchableOpacity}><Text style={styles.buttonsText}>Expirées</Text></TouchableOpacity>
-      </View>
-    );
-  }
+const Rents = props => {
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  return (
+    <View style={styles.container}>
+        <Text style={styles.title}>Mes locations</Text>
+        <TouchableOpacity onPress={() => props.navigation.push('OngoingRents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.buttonsText}>En cours</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents')} style={styles.TouchableOpacity}><Text style={styles.buttonsText}>Expirées</Text></TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -52,3 +53,5 @@ const styles = StyleSheet.create({
     }
 
 });
+
+export default Rents;
