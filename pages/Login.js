@@ -3,7 +3,7 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
-function Login() {
+const Login = props => {
 
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
@@ -31,6 +31,9 @@ function Login() {
 
     console.log((await user_sign_in).user.displayName)
     */
+     props.navigation.push('Home', {
+       username: (await user_sign_in).user.displayName
+     });
   }
 
   signOutFromGoogle = async () => {
@@ -53,16 +56,14 @@ function Login() {
   if(!user) {
     return (
       <View style={styles.container}>
-          <TouchableOpacity title="Google Sign-In" onPress={this.signInWithGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
           <Text style={styles.name}>Aucun user connecté</Text>
-          <TouchableOpacity title="Google Sign-In" onPress={this.signOutFromGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se déconnecter</Text></TouchableOpacity>
+          <TouchableOpacity title="Google Sign-In" onPress={this.signInWithGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
           <Text style={styles.copyright}>Copyright 2022 - 2023 Nom. All rights reserved.</Text>
       </View>
     );
   } else {
     return (
       <View style={styles.container}>
-          <TouchableOpacity title="Google Sign-In" onPress={this.signInWithGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
           <Text style={styles.name}>{user.displayName}</Text>
           <TouchableOpacity title="Google Sign-In" onPress={this.signOutFromGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se déconnecter</Text></TouchableOpacity>
           <Text style={styles.copyright}>Copyright 2022 - 2023 Nom. All rights reserved.</Text>

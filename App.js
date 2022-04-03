@@ -15,12 +15,20 @@ import OngoingRents from './pages/OngoingRents'
 import ExpiredRents from './pages/ExpiredRents'
 import RentPage from './pages/RentPage'
 import CreateRent from './pages/CreateRent'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-export default class App extends React.Component {
+const { Navigator, Screen } = createNativeStackNavigator();
 
-  render() {
-    return (
-      <Login />
-    );
-  }
+function App() {
+  return (
+    <NavigationContainer>
+      <Navigator>
+        <Screen name='Login' component={Login} options={{ headerShown: false }} />
+        <Screen name='Home' component={Home} options={{ title: "Logo", headerBackVisible: false, gestureEnabled: false }} />
+      </Navigator>
+    </NavigationContainer>
+  );
 }
+
+export default App;

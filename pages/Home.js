@@ -1,13 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import TopBar from '../components/TopBar'
+import auth from '@react-native-firebase/auth';
 
-export default class Home extends React.Component {
-  render() {
+const Home = props => {
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  signOutFromGoogle = async () => {
+    auth().signOut().then(() => console.log('User signed out!'));
+  }
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+  if(!user) {
+    return (
+      <View onLayout={props.navigation.pop()}></View>
+    );
+  } else {
     return (
       <View style={styles.container}>
-          <TopBar />
-          <Text style={styles.name}>Bonjour, Username !</Text>
+          <Text style={styles.name}>Bonjour, {props.route.params.username} !</Text>
+          <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.TouchableOpacity}><Text style={styles.rentsText}>Se déconnecter</Text></TouchableOpacity>
           <TouchableOpacity style={styles.TouchableOpacity}><Text style={styles.rentsText}>Mes locations</Text></TouchableOpacity>
           <TextInput style={styles.search} placeholder='Rechercher' placeholderTextColor="#777"></TextInput>
           <Image style={styles.map} source={require('../images/map.jpeg')} />
@@ -64,3 +90,5 @@ const styles = StyleSheet.create({
     }
 
 });
+
+export default Home;
