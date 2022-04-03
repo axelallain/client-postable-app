@@ -26,15 +26,12 @@ const OngoingRents = props => {
   return (
     <View style={styles.container}>
         <Text style={styles.title}>Locations en cours</Text>
-        <TouchableOpacity style={styles.TouchableOpacity}>
-            <Text style={styles.buttonsText}>
-            {`Location ID
-Adresse
-Ville, Pays
-
-Du 01-01-22 au 08-01-22 à 10h10`}
-            </Text>
-        </TouchableOpacity>
+        { rents.map((rent) => (
+          <TouchableOpacity style={styles.TouchableOpacity}>
+          <Text style={styles.buttonsText}>{rent.id}</Text>
+      </TouchableOpacity>
+        ))}
+        
     </View>
   );
 }
