@@ -7,6 +7,7 @@
  */
 
 import React from 'react'
+import {Button} from 'react-native'
 import TopBar from './components/TopBar'
 import Login from './pages/Login'
 import Home from './pages/Home'
@@ -25,10 +26,14 @@ function App() {
     <NavigationContainer>
       <Navigator>
         <Screen name='Login' component={Login} options={{ headerShown: false }} />
-        <Screen name='Home' component={Home} options={{ headerBackVisible: false, gestureEnabled: false }} />
-        <Screen name='Rents' component={Rents} />
-        <Screen name='OngoingRents' component={OngoingRents} />
-        <Screen name='ExpiredRents' component={ExpiredRents} />
+        <Screen name='Home' component={Home} options={{ 
+          title: 'Accueil', 
+          headerBackVisible: false, 
+          gestureEnabled: false }} />
+        <Screen name='Rents' component={Rents} options={{ title: 'Mes locations', headerBackTitle: 'Retour' }} />
+        <Screen name='OngoingRents' component={OngoingRents} options={{ title: 'Locations en cours', headerBackTitle: 'Retour' }} />
+        <Screen name='ExpiredRents' component={ExpiredRents} options={{ title: 'Locations expirées', headerBackTitle: 'Retour' }} />
+        <Screen name="RentPage" component={RentPage} options={{ title: 'Détails', headerBackTitle: 'Retour' }} />
       </Navigator>
     </NavigationContainer>
   );

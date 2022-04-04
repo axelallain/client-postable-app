@@ -1,28 +1,84 @@
-import React from 'react'
-import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
+import React, { useState, useEffect } from 'react';
+import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 import TopBar from '../components/TopBar'
+import Moment from 'moment'
 
-export default class RentPage extends React.Component {
-  render() {
+const RentPage = props => {
+
+    Moment.locale('fr');
+
+    const axios = require('axios');
+    
+    const [rent, setRent] = useState({})
+
+    const getRentFromApiAsync = async () => {
+        const response = await axios.get('http://localhost:8080/rents/' + props.route.params.rent_id);
+        setRent(response.data);
+        console.log(rent);
+    }
+
+    const lock = async () => {
+        const response = await axios.get('http://192.168.1.29:5000/lock', {
+          params: {
+            name: props.route.params.username,
+            rent_id: props.route.params.rent_id
+          }
+        }).then((res) => console.log(res));
+    }
+
+    const endRent = async () => {
+        // Update rent status to expired
+        props.navigation.pop();
+    }
+
+    const showConfirmDialog = () => {
+        return Alert.alert(
+        "Mettre fin à cette location ?",
+        "La location sera archivée dans les locations expirées.",
+        [
+            // The "Yes" button
+            {
+            text: "Confirmer",
+            onPress: () => {
+                endRent();
+            },
+            },
+            // The "No" button
+            // Does nothing but dismiss the dialog when tapped
+            {
+            text: "Annuler",
+            },
+        ]
+        );
+    };
+
+    useEffect(() => {
+        getRentFromApiAsync();
+    }, []);
+
+    if(rent.status == 'expired') {
+        return (
+            <View style={styles.container}>
+                <TouchableOpacity style={styles.expiredLetterbox}>
+                    <Text style={styles.buttonsText}>Letterbox {rent.id}</Text>
+                </TouchableOpacity>
+                <Image style={styles.map} source={require('../images/map.jpeg')} />
+                <TouchableOpacity disabled={true} style={styles.expiredButton}><Text style={styles.lockText}>EXPIRÉE</Text></TouchableOpacity>
+            </View>
+        );
+    }
+  
     return (
-      <View style={styles.container}>
-          <TopBar />
-          <Text style={styles.title}>Fiche de la location ID</Text>
-          <TouchableOpacity style={styles.TouchableOpacity}>
-              <Text style={styles.buttonsText}>
-              {`Letterbox ID
-Adresse
-Ville, Pays
-
-Du 01-01-22 au 08-01-22 à 10h10`}
-              </Text>
-          </TouchableOpacity>
-          <Text style={styles.delete}>Supprimer cette location</Text>
-          <Image style={styles.map} source={require('../images/map.jpeg')} />
-          <TouchableOpacity style={styles.lockButton}><Text style={styles.lockText}>DEVERROUILLER</Text></TouchableOpacity>
-      </View>
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.ongoingLetterbox}>
+                <Text style={styles.buttonsText}>Letterbox {rent.id}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => showConfirmDialog()}><Text style={styles.delete}>Mettre fin à cette location</Text></TouchableOpacity>
+            <Image style={styles.map} source={require('../images/map.jpeg')} />
+            <TouchableOpacity onPress={() => lock()} style={styles.unlockButton}><Text style={styles.lockText}>DÉVERROUILLER</Text></TouchableOpacity>
+        </View>
     );
-  }
+    
 }
 
 const styles = StyleSheet.create({
@@ -45,15 +101,28 @@ const styles = StyleSheet.create({
         color: 'black'
     },
 
-    TouchableOpacity: {
+    ongoingLetterbox: {
         backgroundColor: 'white',
         paddingTop: "4%",
         paddingRight: "10%",
         paddingBottom: "4%",
         paddingLeft: "10%",
-        borderRadius: 8,
         marginTop: "8%",
         marginBottom: "0%",
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.1,
+        shadowRadius: 3
+    },
+
+    expiredLetterbox: {
+        backgroundColor: 'white',
+        paddingTop: "4%",
+        paddingRight: "10%",
+        paddingBottom: "4%",
+        paddingLeft: "10%",
+        marginTop: "8%",
+        marginBottom: "10%",
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.1,
@@ -74,8 +143,38 @@ const styles = StyleSheet.create({
         borderWidth: 0.2
     },
 
-    lockButton: {
+    unlockButton: {
         backgroundColor: '#0094FF',
+        paddingTop: "5%",
+        paddingRight: "25%",
+        paddingBottom: "5%",
+        paddingLeft: "25%",
+        borderRadius: 8,
+        marginTop: "8%",
+        marginBottom: "0%",
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.1,
+        shadowRadius: 3
+    },
+
+    lockButton: {
+        backgroundColor: 'red',
+        paddingTop: "5%",
+        paddingRight: "25%",
+        paddingBottom: "5%",
+        paddingLeft: "25%",
+        borderRadius: 8,
+        marginTop: "8%",
+        marginBottom: "0%",
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.1,
+        shadowRadius: 3
+    },
+
+    expiredButton: {
+        backgroundColor: 'grey',
         paddingTop: "5%",
         paddingRight: "25%",
         paddingBottom: "5%",
@@ -95,3 +194,5 @@ const styles = StyleSheet.create({
     },
 
 });
+
+export default RentPage;

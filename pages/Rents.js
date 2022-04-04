@@ -9,7 +9,6 @@ const Rents = props => {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.title}>Mes locations</Text>
         <TouchableOpacity onPress={() => props.navigation.push('OngoingRents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.buttonsText}>En cours</Text></TouchableOpacity>
         <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.buttonsText}>Expirées</Text></TouchableOpacity>
     </View>

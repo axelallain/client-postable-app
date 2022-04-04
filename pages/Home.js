@@ -32,8 +32,8 @@ const Home = props => {
   } else {
     return (
       <View style={styles.container}>
+          <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.signOutButton}><Text style={styles.rentsText}>Se déconnecter</Text></TouchableOpacity>
           <Text style={styles.name}>Bonjour, {props.route.params.fullname} !</Text>
-          <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.TouchableOpacity}><Text style={styles.rentsText}>Se déconnecter</Text></TouchableOpacity>
           <TouchableOpacity onPress={() => props.navigation.push('Rents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.rentsText}>Mes locations</Text></TouchableOpacity>
           <TextInput style={styles.search} placeholder='Rechercher' placeholderTextColor="#777"></TextInput>
           <Image style={styles.map} source={require('../images/map.jpeg')} />
@@ -51,6 +51,21 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       paddingTop: "2%"
     },
+
+    signOutButton: {
+      backgroundColor: 'white',
+      paddingTop: "4%",
+      paddingRight: "12%",
+      paddingBottom: "4%",
+      paddingLeft: "12%",
+      borderRadius: 8,
+      marginTop: "8%",
+      marginBottom: "2%",
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.1,
+      shadowRadius: 3
+  },
 
     name: {
         marginTop: "7%"
