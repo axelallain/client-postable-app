@@ -1,31 +1,37 @@
-import React from 'react'
-import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
+import React, { useState, useEffect } from 'react';
+import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native'
 import TopBar from '../components/TopBar'
 
 const ExpiredRents = props => {
+
+  const axios = require('axios');
+  const [rents, setRents] = useState([])
+
+  const getRentsFromApiAsync = async () => {
+    const response = await axios.get('http://localhost:8080/rents', {
+      params: {
+        username: props.route.params.username,
+        status: 'expired'
+      }
+    });
+    setRents(response.data);
+    console.log(rents);
+  }
+
+  useEffect(() => {
+    getRentsFromApiAsync();
+  }, []);
+
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Locations expirées</Text>
-        <TouchableOpacity style={styles.TouchableOpacity}>
-            <Text style={styles.buttonsText}>
-            {`Location ID
-Adresse
-Ville, Pays
-
-Du 01-01-21 au 08-01-21 à 10h10`}
-            </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.TouchableOpacity}>
-            <Text style={styles.buttonsText}>
-            {`Location ID
-Adresse
-Ville, Pays
-
-Du 01-01-20 au 08-01-20 à 10h10`}
-            </Text>
-        </TouchableOpacity>
-    </View>
+        { rents.map((rent) => (
+          <TouchableOpacity style={styles.TouchableOpacity}>
+          <Text style={styles.buttonsText}>{rent.id}</Text>
+      </TouchableOpacity>
+        ))}
+        
+    </ScrollView>
   );
 }
 

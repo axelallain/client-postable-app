@@ -32,7 +32,7 @@ const Home = props => {
   } else {
     return (
       <View style={styles.container}>
-          <Text style={styles.name}>Bonjour, {props.route.params.username} !</Text>
+          <Text style={styles.name}>Bonjour, {props.route.params.fullname} !</Text>
           <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.TouchableOpacity}><Text style={styles.rentsText}>Se déconnecter</Text></TouchableOpacity>
           <TouchableOpacity onPress={() => props.navigation.push('Rents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.rentsText}>Mes locations</Text></TouchableOpacity>
           <TextInput style={styles.search} placeholder='Rechercher' placeholderTextColor="#777"></TextInput>

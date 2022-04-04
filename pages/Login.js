@@ -32,7 +32,8 @@ const Login = props => {
     console.log((await user_sign_in).user.displayName)
     */
      props.navigation.push('Home', {
-       username: (await user_sign_in).user.displayName
+       username: (await user_sign_in).user.email,
+       fullname: (await user_sign_in).user.displayName
      });
   }
 
