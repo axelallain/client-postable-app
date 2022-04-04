@@ -28,8 +28,11 @@ const OngoingRents = props => {
         <Text style={styles.title}>Locations en cours</Text>
         { rents.map((rent) => (
           <TouchableOpacity style={styles.TouchableOpacity}>
-          <Text style={styles.buttonsText}>{rent.id}</Text>
-      </TouchableOpacity>
+            <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
+            <Text style={styles.buttonsText}>{rent.letterbox.address}</Text>
+            <Text style={styles.buttonsText}>{rent.letterbox.city}, {rent.letterbox.country}</Text>
+            <Text style={styles.buttonsText}>Du {rent.startingDate} au {rent.endingDate}</Text>
+          </TouchableOpacity>
         ))}
         
     </View>
@@ -53,7 +56,9 @@ const styles = StyleSheet.create({
     },
 
     buttonsText: {
-        color: 'black'
+        color: 'black',
+        marginTop: "0.4%",
+        marginBottom: "0.4%"
     },
 
     TouchableOpacity: {
