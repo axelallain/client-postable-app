@@ -29,14 +29,15 @@ const OngoingRents = props => {
   return (
     <View style={styles.container}>
         { rents.map((rent) => (
-          
+
           <TouchableOpacity onPress={() => props.navigation.push('RentPage', { 
             username: props.route.params.username, 
             rent_id: rent.id,
             letterbox_id:rent.letterbox.id,
             letterbox_address:rent.letterbox.address,
             letterbox_city:rent.letterbox.city,
-            letterbox_country:rent.letterbox.country
+            letterbox_country:rent.letterbox.country,
+            letterbox_status:rent.letterbox.status
              })} style={styles.TouchableOpacity}>
 
             <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
