@@ -28,6 +28,8 @@ const RentPage = props => {
 
     const endRent = async () => {
         // Update rent status to expired
+        const response = await axios.put('http://localhost:8080/endrent/' + props.route.params.rent_id);
+        console.log(response.data);
         props.navigation.pop();
     }
 
