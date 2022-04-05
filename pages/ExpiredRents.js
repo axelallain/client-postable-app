@@ -29,7 +29,16 @@ const ExpiredRents = props => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
         { rents.map((rent) => (
-          <TouchableOpacity onPress={() => props.navigation.push('RentPage', { username: props.route.params.username, rent_id: rent.id })} style={styles.TouchableOpacity}>
+            
+          <TouchableOpacity onPress={() => props.navigation.push('RentPage', { 
+            username: props.route.params.username, 
+            rent_id: rent.id,
+            letterbox_id:rent.letterbox.id,
+            letterbox_address:rent.letterbox.address,
+            letterbox_city:rent.letterbox.city,
+            letterbox_country:rent.letterbox.country
+             })} style={styles.TouchableOpacity}>
+
             <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
             <Text style={styles.buttonsText}>{rent.letterbox.address}</Text>
             <Text style={styles.buttonsText}>{rent.letterbox.city}, {rent.letterbox.country}</Text>

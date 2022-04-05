@@ -60,7 +60,10 @@ const RentPage = props => {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.expiredLetterbox}>
-                    <Text style={styles.buttonsText}>Letterbox {rent.id}</Text>
+                    <Text style={styles.buttonsText}>Letterbox {props.route.params.letterbox_id}</Text>
+                    <Text style={styles.buttonsText}>{props.route.params.letterbox_address}</Text>
+                    <Text style={styles.buttonsText}>{props.route.params.letterbox_city}, {props.route.params.letterbox_country}</Text>
+                    <Text style={styles.buttonsText}>Du {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')} au {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
                 </TouchableOpacity>
                 <Image style={styles.map} source={require('../images/map.jpeg')} />
                 <TouchableOpacity disabled={true} style={styles.expiredButton}><Text style={styles.lockText}>EXPIRÉE</Text></TouchableOpacity>
@@ -71,7 +74,11 @@ const RentPage = props => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.ongoingLetterbox}>
-                <Text style={styles.buttonsText}>Letterbox {rent.id}</Text>
+                <Text style={styles.buttonsText}>Letterbox {props.route.params.letterbox_id}</Text>
+                <Text style={styles.buttonsText}>{props.route.params.letterbox_address}</Text>
+                <Text style={styles.buttonsText}>{props.route.params.letterbox_city}, {props.route.params.letterbox_country}</Text>
+                <Text style={styles.buttonsText}>Depuis le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
+                <Text style={styles.buttonsText}>Expiration le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => showConfirmDialog()}><Text style={styles.delete}>Mettre fin à cette location</Text></TouchableOpacity>
             <Image style={styles.map} source={require('../images/map.jpeg')} />
@@ -109,6 +116,7 @@ const styles = StyleSheet.create({
         paddingLeft: "10%",
         marginTop: "8%",
         marginBottom: "0%",
+        width: "100%",
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.1,
@@ -123,6 +131,7 @@ const styles = StyleSheet.create({
         paddingLeft: "10%",
         marginTop: "8%",
         marginBottom: "10%",
+        width: "100%",
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.1,
