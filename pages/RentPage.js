@@ -66,7 +66,8 @@ const RentPage = props => {
                     <Text style={styles.buttonsText}>Letterbox {props.route.params.letterbox_id}</Text>
                     <Text style={styles.buttonsText}>{props.route.params.letterbox_address}</Text>
                     <Text style={styles.buttonsText}>{props.route.params.letterbox_city}, {props.route.params.letterbox_country}</Text>
-                    <Text style={styles.buttonsText}>Du {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')} au {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
+                    <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
+                    <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
                 </TouchableOpacity>
                 <Image style={styles.map} source={require('../images/map.jpeg')} />
                 <TouchableOpacity disabled={true} style={styles.expiredButton}><Text style={styles.lockText}>EXPIRÉE</Text></TouchableOpacity>
