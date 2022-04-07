@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
       height: "100%",
       backgroundColor: '#f2f2f2',
       flexDirection: 'column',
-      paddingTop: "2%",
+      paddingTop: "0%",
       flex: 1
     },
 
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
         paddingRight: "10%",
         paddingBottom: "4%",
         paddingLeft: "10%",
-        marginTop: "8%",
-        marginBottom: "0%",
+        marginTop: "0%",
+        marginBottom: "5%",
         width: "100%",
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
         shadowOpacity: 0.1,
-        shadowRadius: 3,
+        shadowRadius: 3
     }
 
 });

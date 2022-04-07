@@ -95,12 +95,12 @@ const styles = StyleSheet.create({
         width: "85%",
         borderBottomWidth: 1,
         paddingBottom: "2%",
-        marginBottom: "5%"
+        marginBottom: "7%"
     },
 
     map: {
-        height: "58%",
-        width: "85%",
+        height: "54%",
+        width: "100%",
         borderWidth: 0.2
     }
 
