@@ -12,7 +12,7 @@ const RentPage = props => {
     const [rent, setRent] = useState({})
 
     const getRentFromApiAsync = async () => {
-        const response = await axios.get('http://localhost:8080/rents/' + props.route.params.rent_id);
+        const response = await axios.get('http://192.168.1.17:8080/rents/' + props.route.params.rent_id);
         setRent(response.data);
         console.log(rent);
     }
@@ -28,7 +28,7 @@ const RentPage = props => {
 
     const endRent = async () => {
         // Update rent status to expired
-        const response = await axios.put('http://localhost:8080/endrent/' + props.route.params.rent_id);
+        const response = await axios.put('http://192.168.1.17:8080/endrent/' + props.route.params.rent_id);
         console.log(response.data);
         props.navigation.pop();
         props.navigation.pop();

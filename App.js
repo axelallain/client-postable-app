@@ -31,7 +31,6 @@ function App() {
           headerBackVisible: false, 
           gestureEnabled: false }} />
         <Screen name='Rents' component={Rents} options={{ title: 'Mes locations', headerBackTitle: 'Retour' }} />
-        <Screen name='OngoingRents' component={OngoingRents} options={{ title: 'Locations en cours', headerBackTitle: 'Retour' }} />
         <Screen name='ExpiredRents' component={ExpiredRents} options={{ title: 'Locations expirées', headerBackTitle: 'Retour' }} />
         <Screen name="RentPage" component={RentPage} options={{ title: 'Détails', headerBackTitle: 'Retour' }} />
       </Navigator>

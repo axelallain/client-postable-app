@@ -12,7 +12,7 @@ const OngoingRents = props => {
   const [rents, setRents] = useState([])
 
   const getRentsFromApiAsync = async () => {
-    const response = await axios.get('http://localhost:8080/rents', {
+    const response = await axios.get('http://192.168.1.17:8080/rents', {
       params: {
         username: props.route.params.username,
         status: 'ongoing'
@@ -30,7 +30,7 @@ const OngoingRents = props => {
     <View style={styles.container}>
         { rents.map((rent) => (
 
-          <TouchableOpacity onPress={() => props.navigation.push('RentPage', { 
+          <TouchableOpacity key={rent.id} onPress={() => props.navigation.push('RentPage', { 
             username: props.route.params.username, 
             rent_id: rent.id,
             letterbox_id:rent.letterbox.id,
@@ -40,7 +40,6 @@ const OngoingRents = props => {
             letterbox_status:rent.letterbox.status
              })} style={styles.TouchableOpacity}>
 
-            <Text style={styles.buttonsText}>Location {rent.id}</Text>
             <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
             <Text style={styles.buttonsText}>{rent.letterbox.address}</Text>
             <Text style={styles.buttonsText}>{rent.letterbox.city}, {rent.letterbox.country}</Text>
