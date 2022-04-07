@@ -74,7 +74,7 @@ const Login = props => {
 const styles = StyleSheet.create({
     container: {
       height: "100%",
-      backgroundColor: '#f2f2f2',
+      backgroundColor: '#66c43e',
       flexDirection: 'column', // row
       alignItems: 'center',
       justifyContent: 'center', // center, space-around
@@ -82,14 +82,14 @@ const styles = StyleSheet.create({
     },
 
     name: {
-        color: 'black',
+        color: 'white',
         fontWeight: 'bold',
         fontSize: 25,
         fontFamily: 'Futura'
     },
 
     copyright: {
-        color: 'black',
+        color: 'white',
         fontSize: 11
     },
 

@@ -40,6 +40,7 @@ const ExpiredRents = props => {
                 letterbox_country:rent.letterbox.country
                 })} style={styles.TouchableOpacity}>
 
+                <Text style={styles.expiredRentText}>Location expirée</Text>
                 <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
                 <Text style={styles.buttonsText}>{rent.letterbox.address}</Text>
                 <Text style={styles.buttonsText}>{rent.letterbox.city}, {rent.letterbox.country}</Text>
@@ -70,6 +71,14 @@ const styles = StyleSheet.create({
         marginTop: "7%",
         fontWeight: 'bold',
         fontSize: 16
+    },
+
+    expiredRentText: {
+      color: 'red',
+      marginTop: "0.4%",
+      marginBottom: "0.4%",
+      fontWeight: 'bold',
+      marginBottom: "5%"
     },
 
     buttonsText: {
