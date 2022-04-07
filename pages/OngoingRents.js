@@ -40,6 +40,7 @@ const OngoingRents = props => {
             letterbox_status:rent.letterbox.status
              })} style={styles.TouchableOpacity}>
 
+            <Text style={styles.buttonsText}>Location {rent.id}</Text>
             <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
             <Text style={styles.buttonsText}>{rent.letterbox.address}</Text>
             <Text style={styles.buttonsText}>{rent.letterbox.city}, {rent.letterbox.country}</Text>

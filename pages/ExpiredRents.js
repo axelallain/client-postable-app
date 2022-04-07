@@ -40,6 +40,7 @@ const ExpiredRents = props => {
                 letterbox_country:rent.letterbox.country
                 })} style={styles.TouchableOpacity}>
 
+                <Text style={styles.buttonsText}>Location {rent.id}</Text>
                 <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
                 <Text style={styles.buttonsText}>{rent.letterbox.address}</Text>
                 <Text style={styles.buttonsText}>{rent.letterbox.city}, {rent.letterbox.country}</Text>
