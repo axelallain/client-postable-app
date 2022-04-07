@@ -58,7 +58,7 @@ const Login = props => {
   if(!user) {
     return (
       <View style={styles.container}>
-          <Text style={styles.name}>Postable</Text>
+          <Text style={styles.name}>Postable.</Text>
           <TouchableOpacity title="Google Sign-In" onPress={this.signInWithGoogle} style={styles.TouchableOpacity}><Text style={styles.loginText}>Se connecter avec Google</Text></TouchableOpacity>
           <Text style={styles.copyright}>Copyright 2022 - 2023 Postable. All rights reserved.</Text>
       </View>
