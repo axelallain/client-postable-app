@@ -41,7 +41,7 @@ const ExpiredRents = props => {
                 })} style={styles.TouchableOpacity}>
 
                 <Text style={styles.expiredRentText}>Location expirée</Text>
-                <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
+                <Text style={styles.buttonsText}>Boîte {rent.letterbox.id}</Text>
                 <Text style={styles.buttonsText}>{rent.letterbox.address}</Text>
                 <Text style={styles.buttonsText}>{rent.letterbox.city}, {rent.letterbox.country}</Text>
                 <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>

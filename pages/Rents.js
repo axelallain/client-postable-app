@@ -45,7 +45,7 @@ const Rents = props => {
             })} style={styles.ongoingRent}>
 
             <Text style={styles.activeRentText}>Location en cours</Text>
-            <Text style={styles.buttonsText}>Letterbox {rent.letterbox.id}</Text>
+            <Text style={styles.buttonsText}>Boîte {rent.letterbox.id}</Text>
             <Text style={styles.buttonsText}>{rent.letterbox.address}</Text>
             <Text style={styles.buttonsText}>{rent.letterbox.city}, {rent.letterbox.country}</Text>
             <Text style={styles.buttonsText}>Depuis le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>

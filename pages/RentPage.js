@@ -69,7 +69,7 @@ const RentPage = props => {
                     <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
                     <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
                 </TouchableOpacity>
-                <Image style={styles.map} source={require('../images/map.jpeg')} />
+                <Image style={styles.mapExpired} source={require('../images/map.jpeg')} />
                 <TouchableOpacity disabled={true} style={styles.expiredButton}><Text style={styles.lockText}>EXPIRÉE</Text></TouchableOpacity>
             </View>
         );
@@ -78,7 +78,7 @@ const RentPage = props => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.ongoingLetterbox}>
-                <Text style={styles.buttonsText}>Letterbox {props.route.params.letterbox_id}</Text>
+                <Text style={styles.buttonsText}>Boîte {props.route.params.letterbox_id}</Text>
                 <Text style={styles.buttonsText}>{props.route.params.letterbox_address}</Text>
                 <Text style={styles.buttonsText}>{props.route.params.letterbox_city}, {props.route.params.letterbox_country}</Text>
                 <Text style={styles.buttonsText}>Depuis le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
@@ -94,12 +94,12 @@ const RentPage = props => {
 
 const styles = StyleSheet.create({
     container: {
-      height: "100%",
+      height: "85%",
       backgroundColor: '#f2f2f2',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'flex-start',
-      paddingTop: "2%"
+      justifyContent: 'space-between',
+      paddingTop: "0%"
     },
 
     title: {
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         paddingRight: "10%",
         paddingBottom: "4%",
         paddingLeft: "10%",
-        marginTop: "8%",
+        marginTop: "0%",
         marginBottom: "0%",
         width: "100%",
         shadowColor: '#171717',
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         paddingRight: "10%",
         paddingBottom: "4%",
         paddingLeft: "10%",
-        marginTop: "8%",
+        marginTop: "0%",
         marginBottom: "10%",
         width: "100%",
         shadowColor: '#171717',
@@ -150,9 +150,15 @@ const styles = StyleSheet.create({
         marginBottom: "7%"
     },
 
+    mapExpired: {
+        height: "70%",
+        width: "100%",
+        borderWidth: 0.2
+    },
+
     map: {
-        height: "40%",
-        width: "80%",
+        height: "65%",
+        width: "100%",
         borderWidth: 0.2
     },
 
