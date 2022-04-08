@@ -34,8 +34,41 @@ const Home = props => {
       <View style={styles.container}>
           <TextInput style={styles.search} placeholder='Rechercher une boîte sur la carte' placeholderTextColor="#777"></TextInput>
           <Image style={styles.map} source={require('../images/map.jpeg')} />
-          <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.signOutButton}><Text style={styles.rentsText}>Se déconnecter</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => props.navigation.push('Rents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.rentsText}>Mes locations</Text></TouchableOpacity>
+          <View style={styles.bottomBar}>
+            <TouchableOpacity style={styles.TouchableOpacity}>
+              <Image
+                source={require('../images/home.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                    tintColor: '#66C43E'
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.push('Rents', { username: props.route.params.username })} style={styles.TouchableOpacity}>
+              <Image
+                source={require('../images/rents.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.push('Account', { username: props.route.params.username })} style={styles.TouchableOpacity}>
+            <Image
+                source={require('../images/account.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
       </View>
     );
   }
@@ -51,21 +84,6 @@ const styles = StyleSheet.create({
       paddingTop: "0%"
     },
 
-    signOutButton: {
-      backgroundColor: 'white',
-      paddingTop: "4%",
-      paddingRight: "12%",
-      paddingBottom: "4%",
-      paddingLeft: "12%",
-      borderRadius: 8,
-      marginTop: "8%",
-      marginBottom: "2%",
-      shadowColor: '#171717',
-      shadowOffset: {width: -2, height: 4},
-      shadowOpacity: 0.1,
-      shadowRadius: 3
-  },
-
     name: {
         marginTop: "7%"
     },
@@ -77,31 +95,33 @@ const styles = StyleSheet.create({
 
     TouchableOpacity: {
         backgroundColor: 'white',
-        paddingTop: "4%",
+        paddingTop: "8%",
         paddingRight: "12%",
         paddingBottom: "4%",
         paddingLeft: "12%",
-        borderRadius: 8,
-        marginTop: "8%",
-        marginBottom: "10%",
-        shadowColor: '#171717',
-        shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.1,
-        shadowRadius: 3
+        width: '35%'
     },
 
     search: {
         width: "100%",
-        paddingTop: "2%",
-        paddingBottom: "2%",
+        paddingTop: "3%",
+        paddingBottom: "3%",
         paddingLeft: "2%",
-        marginBottom: "0%",
-        backgroundColor: "#999"
+        backgroundColor: "#f2f2f2",
+        borderBottomWidth: 0.2,
+        borderBottomColor: 'grey'
     },
 
     map: {
-        height: "67%",
+        height: "80%",
         width: "100%"
+    },
+
+    bottomBar: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: '100%',
+      height: '100%'
     }
 
 });

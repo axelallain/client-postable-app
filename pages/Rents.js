@@ -3,11 +3,16 @@ import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-
 import TopBar from '../components/TopBar'
 import axios from 'axios';
 import Moment from 'moment'
+import auth from '@react-native-firebase/auth';
 
 const Rents = props => {
 
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+
+  signOutFromGoogle = async () => {
+    auth().signOut().then(() => console.log('User signed out!'));
+  }
 
   Moment.locale('fr');
 
@@ -53,6 +58,41 @@ const Rents = props => {
           </TouchableOpacity>
           ))}
           <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.expiredButtonText}>Expirées</Text></TouchableOpacity>
+          <View style={styles.bottomBar}>
+            <TouchableOpacity onPress={() => props.navigation.pop()} style={styles.bottomBarButtons}>
+              <Image
+                source={require('../images/home.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.bottomBarButtons}>
+              <Image
+                source={require('../images/rents.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                    tintColor: '#66C43E'
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.push('Account', { username: props.route.params.username })} style={styles.bottomBarButtons}>
+            <Image
+                source={require('../images/account.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
       </View>
     );
   }
@@ -70,6 +110,23 @@ const Rents = props => {
 }
 
 const styles = StyleSheet.create({
+    bottomBar: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: '100%',
+      height: '30%',
+      marginTop: '103%'
+    },
+
+    bottomBarButtons: {
+      backgroundColor: 'white',
+      paddingTop: "8%",
+      paddingRight: "12%",
+      paddingBottom: "4%",
+      paddingLeft: "12%",
+      width: '35%'
+  },
+
     container: {
       height: "100%",
       backgroundColor: '#f2f2f2',
