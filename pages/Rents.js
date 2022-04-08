@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      paddingTop: "2%"
+      paddingTop: "0%"
     },
 
     title: {
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
       paddingRight: "10%",
       paddingBottom: "4%",
       paddingLeft: "10%",
-      marginTop: "8%",
+      marginTop: "0%",
       marginBottom: "0%",
       width: "100%",
       shadowColor: '#171717',
