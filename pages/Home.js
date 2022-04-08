@@ -32,11 +32,10 @@ const Home = props => {
   } else {
     return (
       <View style={styles.container}>
-          <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.signOutButton}><Text style={styles.rentsText}>Se déconnecter</Text></TouchableOpacity>
-          <Text style={styles.name}>Bonjour, {props.route.params.fullname} !</Text>
-          <TouchableOpacity onPress={() => props.navigation.push('Rents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.rentsText}>Mes locations</Text></TouchableOpacity>
-          <TextInput style={styles.search} placeholder='Rechercher' placeholderTextColor="#777"></TextInput>
+          <TextInput style={styles.search} placeholder='Rechercher une boîte sur la carte' placeholderTextColor="#777"></TextInput>
           <Image style={styles.map} source={require('../images/map.jpeg')} />
+          <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.signOutButton}><Text style={styles.rentsText}>Se déconnecter</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.push('Rents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.rentsText}>Mes locations</Text></TouchableOpacity>
       </View>
     );
   }
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      paddingTop: "2%"
+      paddingTop: "0%"
     },
 
     signOutButton: {
@@ -92,16 +91,17 @@ const styles = StyleSheet.create({
     },
 
     search: {
-        width: "85%",
-        borderBottomWidth: 1,
+        width: "100%",
+        paddingTop: "2%",
         paddingBottom: "2%",
-        marginBottom: "7%"
+        paddingLeft: "2%",
+        marginBottom: "0%",
+        backgroundColor: "#999"
     },
 
     map: {
-        height: "54%",
-        width: "100%",
-        borderWidth: 0.2
+        height: "67%",
+        width: "100%"
     }
 
 });
