@@ -37,12 +37,11 @@ const Home = props => {
           <View style={styles.bottomBar}>
             <TouchableOpacity style={styles.TouchableOpacity}>
               <Image
-                source={require('../images/home.png')}
+                source={require('../images/homeActive.png')}
                 resizeMode='contain'
                 style={{
                     width: 32,
                     height: 32,
-                    tintColor: '#66C43E'
                 }}
               />
             </TouchableOpacity>

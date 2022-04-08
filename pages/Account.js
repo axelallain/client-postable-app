@@ -16,7 +16,43 @@ const Account = props => {
   }
 
   return(
-    <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.TouchableOpacity}><Text style={styles.expiredButtonText}>Se déconnecter</Text></TouchableOpacity>
+    <View style={styles.container}>
+        <TouchableOpacity onPress={() => signOutFromGoogle()} style={styles.TouchableOpacity}><Text style={styles.expiredButtonText}>Se déconnecter</Text></TouchableOpacity>
+        <View style={styles.bottomBar}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('Home', { username: props.route.params.username })} style={styles.bottomBarButtons}>
+              <Image
+                source={require('../images/home.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.navigate('Rents', { username: props.route.params.username })} style={styles.bottomBarButtons}>
+              <Image
+                source={require('../images/rents.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.bottomBarButtons}>
+            <Image
+                source={require('../images/accountActive.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+        </View>
+    </View>
   );
 }
 
@@ -26,7 +62,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       width: '100%',
       height: '30%',
-      marginTop: '103%'
+      marginTop: '144%'
     },
 
     bottomBarButtons: {

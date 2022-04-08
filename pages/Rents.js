@@ -59,7 +59,7 @@ const Rents = props => {
           ))}
           <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.expiredButtonText}>Expirées</Text></TouchableOpacity>
           <View style={styles.bottomBar}>
-            <TouchableOpacity onPress={() => props.navigation.pop()} style={styles.bottomBarButtons}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('Home', { username: props.route.params.username })} style={styles.bottomBarButtons}>
               <Image
                 source={require('../images/home.png')}
                 resizeMode='contain'
@@ -72,17 +72,16 @@ const Rents = props => {
 
             <TouchableOpacity style={styles.bottomBarButtons}>
               <Image
-                source={require('../images/rents.png')}
+                source={require('../images/rentsActive.png')}
                 resizeMode='contain'
                 style={{
                     width: 32,
                     height: 32,
-                    tintColor: '#66C43E'
                 }}
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => props.navigation.push('Account', { username: props.route.params.username })} style={styles.bottomBarButtons}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('Account', { username: props.route.params.username })} style={styles.bottomBarButtons}>
             <Image
                 source={require('../images/account.png')}
                 resizeMode='contain'
