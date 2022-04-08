@@ -10,10 +10,6 @@ const Rents = props => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  signOutFromGoogle = async () => {
-    auth().signOut().then(() => console.log('User signed out!'));
-  }
-
   Moment.locale('fr');
 
   const axios = require('axios');
@@ -57,7 +53,11 @@ const Rents = props => {
             <Text style={styles.buttonsText}>Expiration le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
           </TouchableOpacity>
           ))}
-          <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.expiredButtonText}>Expirées</Text></TouchableOpacity>
+
+          <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents', { username: props.route.params.username })} style={styles.TouchableOpacity}>
+            <Text style={styles.expiredButtonText}>Expirées</Text>
+          </TouchableOpacity>
+
           <View style={styles.bottomBar}>
             <TouchableOpacity onPress={() => props.navigation.navigate('Home', { username: props.route.params.username })} style={styles.bottomBarButtons}>
               <Image
@@ -102,7 +102,45 @@ const Rents = props => {
           <TouchableOpacity style={styles.ongoingRent}>
             <Text style={styles.activeRentTextEmpty}>Aucune location en cours</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents', { username: props.route.params.username })} style={styles.TouchableOpacity}><Text style={styles.expiredButtonText}>Expirées</Text></TouchableOpacity>
+
+          <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents', { username: props.route.params.username })} style={styles.TouchableOpacity}>
+            <Text style={styles.expiredButtonText}>Expirées</Text>
+          </TouchableOpacity>
+
+          <View style={styles.bottomBarExpired}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('Home', { username: props.route.params.username })} style={styles.bottomBarButtons}>
+              <Image
+                source={require('../images/home.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.bottomBarButtons}>
+              <Image
+                source={require('../images/rentsActive.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.navigate('Account', { username: props.route.params.username })} style={styles.bottomBarButtons}>
+            <Image
+                source={require('../images/account.png')}
+                resizeMode='contain'
+                style={{
+                    width: 32,
+                    height: 32,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
       </View>
     );
   }
@@ -115,6 +153,14 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '30%',
       marginTop: '103%'
+    },
+
+    bottomBarExpired: {
+      display: 'flex',
+      flexDirection: 'row',
+      width: '100%',
+      height: '30%',
+      marginTop: '131%'
     },
 
     bottomBarButtons: {

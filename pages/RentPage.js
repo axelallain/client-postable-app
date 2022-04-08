@@ -30,8 +30,7 @@ const RentPage = props => {
         // Update rent status to expired
         const response = await axios.put('http://192.168.1.17:8080/endrent/' + props.route.params.rent_id);
         console.log(response.data);
-        props.navigation.pop();
-        props.navigation.pop();
+        props.navigation.navigate('Home', { username: props.route.params.username })
     }
 
     const showConfirmDialog = () => {
