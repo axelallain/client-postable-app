@@ -37,7 +37,9 @@ const ExpiredRents = props => {
                 letterbox_id:rent.letterbox.id,
                 letterbox_address:rent.letterbox.address,
                 letterbox_city:rent.letterbox.city,
-                letterbox_country:rent.letterbox.country
+                letterbox_country:rent.letterbox.country,
+                letterbox_latitude:rent.letterbox.latitude,
+                letterbox_longitude:rent.letterbox.longitude
                 })} style={styles.TouchableOpacity}>
 
                 <Text style={styles.expiredRentText}>Location expirée</Text>

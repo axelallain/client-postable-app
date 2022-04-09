@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 import TopBar from '../components/TopBar'
 import Moment from 'moment'
+import MapView, { Marker } from 'react-native-maps';
 
 const RentPage = props => {
 
@@ -62,13 +63,28 @@ const RentPage = props => {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.expiredLetterbox}>
-                    <Text style={styles.buttonsText}>Letterbox {props.route.params.letterbox_id}</Text>
+                    <Text style={styles.buttonsText}>Boîte {props.route.params.letterbox_id}</Text>
                     <Text style={styles.buttonsText}>{props.route.params.letterbox_address}</Text>
                     <Text style={styles.buttonsText}>{props.route.params.letterbox_city}, {props.route.params.letterbox_country}</Text>
                     <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
                     <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
                 </TouchableOpacity>
-                <Image style={styles.mapExpired} source={require('../images/map.jpeg')} />
+                <MapView
+                    style={styles.map}
+                    region={{
+                    latitude: rent.letterbox.latitude,
+                    longitude: rent.letterbox.longitude,
+                    latitudeDelta: 0.010,
+                    longitudeDelta: 0.010,
+                    }}
+                >
+                    <Marker 
+                        title={'Boîte ' + rent.letterbox.id} 
+                        description={'Description de la boîte'} 
+                        coordinate={{ latitude : rent.letterbox.latitude , longitude : rent.letterbox.longitude }} 
+                    />
+
+                </MapView>
                 <TouchableOpacity disabled={true} style={styles.expiredButton}><Text style={styles.lockText}>EXPIRÉE</Text></TouchableOpacity>
             </View>
         );
@@ -84,7 +100,22 @@ const RentPage = props => {
                 <Text style={styles.buttonsText}>Expiration le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => showConfirmDialog()}><Text style={styles.delete}>Mettre fin à cette location</Text></TouchableOpacity>
-            <Image style={styles.map} source={require('../images/map.jpeg')} />
+            <MapView
+                    style={styles.map}
+                    region={{
+                    latitude: parseFloat(props.route.params.letterbox_latitude),
+                    longitude: parseFloat(props.route.params.letterbox_longitude),
+                    latitudeDelta: 0.010,
+                    longitudeDelta: 0.010,
+                    }}
+                >
+                    <Marker 
+                        title={'Boîte ' + props.route.params.letterbox_id} 
+                        description={'Description de la boîte'} 
+                        coordinate={{ latitude : parseFloat(props.route.params.letterbox_latitude) , longitude : parseFloat(props.route.params.letterbox_longitude) }} 
+                    />
+
+                </MapView>
             <TouchableOpacity onPress={() => lock()} style={styles.unlockButton}><Text style={styles.lockText}>DÉVERROUILLER</Text></TouchableOpacity>
         </View>
     );

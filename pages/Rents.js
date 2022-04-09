@@ -42,7 +42,9 @@ const Rents = props => {
             letterbox_address:rent.letterbox.address,
             letterbox_city:rent.letterbox.city,
             letterbox_country:rent.letterbox.country,
-            letterbox_status:rent.letterbox.status
+            letterbox_status:rent.letterbox.status,
+            letterbox_latitude:rent.letterbox.latitude,
+            letterbox_longitude:rent.letterbox.longitude
             })} style={styles.ongoingRent}>
 
             <Text style={styles.activeRentText}>Location en cours</Text>
