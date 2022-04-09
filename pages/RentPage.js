@@ -70,7 +70,7 @@ const RentPage = props => {
                     <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
                 </TouchableOpacity>
                 <MapView
-                    style={styles.map}
+                    style={styles.mapExpired}
                     region={{
                     latitude: parseFloat(props.route.params.letterbox_latitude),
                     longitude: parseFloat(props.route.params.letterbox_longitude),
