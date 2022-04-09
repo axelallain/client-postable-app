@@ -42,7 +42,7 @@ const Home = props => {
 
   if(!user) {
     return (
-      <View onLayout={props.navigation.pop()}></View>
+      <View onLayout={props.navigation.navigate('Login')}></View>
     );
   } else {
     return (
