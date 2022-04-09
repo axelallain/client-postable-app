@@ -64,24 +64,24 @@ const RentPage = props => {
             <View style={styles.container}>
                 <TouchableOpacity style={styles.expiredLetterbox}>
                     <Text style={styles.buttonsText}>Boîte {props.route.params.letterbox_id}</Text>
-                    <Text style={styles.buttonsText}>{props.route.params.letterbox_address}</Text>
-                    <Text style={styles.buttonsText}>{props.route.params.letterbox_city}, {props.route.params.letterbox_country}</Text>
+                    <Text style={styles.buttonsText}>{props.route.params.letterbox_address.toUpperCase()}</Text>
+                    <Text style={styles.buttonsText}>{props.route.params.letterbox_city.toUpperCase()}, {props.route.params.letterbox_country.toUpperCase()}</Text>
                     <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
                     <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
                 </TouchableOpacity>
                 <MapView
                     style={styles.map}
                     region={{
-                    latitude: rent.letterbox.latitude,
-                    longitude: rent.letterbox.longitude,
+                    latitude: parseFloat(props.route.params.letterbox_latitude),
+                    longitude: parseFloat(props.route.params.letterbox_longitude),
                     latitudeDelta: 0.010,
                     longitudeDelta: 0.010,
                     }}
                 >
                     <Marker 
-                        title={'Boîte ' + rent.letterbox.id} 
+                        title={'Boîte ' + props.route.params.letterbox_id} 
                         description={'Description de la boîte'} 
-                        coordinate={{ latitude : rent.letterbox.latitude , longitude : rent.letterbox.longitude }} 
+                        coordinate={{ latitude : parseFloat(props.route.params.letterbox_latitude) , longitude : parseFloat(props.route.params.letterbox_longitude) }} 
                     />
 
                 </MapView>
@@ -94,8 +94,8 @@ const RentPage = props => {
         <View style={styles.container}>
             <TouchableOpacity style={styles.ongoingLetterbox}>
                 <Text style={styles.buttonsText}>Boîte {props.route.params.letterbox_id}</Text>
-                <Text style={styles.buttonsText}>{props.route.params.letterbox_address}</Text>
-                <Text style={styles.buttonsText}>{props.route.params.letterbox_city}, {props.route.params.letterbox_country}</Text>
+                <Text style={styles.buttonsText}>{props.route.params.letterbox_address.toUpperCase()}</Text>
+                <Text style={styles.buttonsText}>{props.route.params.letterbox_city.toUpperCase()}, {props.route.params.letterbox_country.toUpperCase()}</Text>
                 <Text style={styles.buttonsText}>Depuis le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
                 <Text style={styles.buttonsText}>Expiration le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
             </TouchableOpacity>

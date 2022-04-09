@@ -54,15 +54,16 @@ const Home = props => {
             region={{
               latitude: 49.593255007450125,
               longitude: -1.6860400241268962,
-              latitudeDelta: 0.010,
-              longitudeDelta: 0.010,
+              latitudeDelta: 0.2,
+              longitudeDelta: 0.2,
             }}
           >
               { letterboxes.map((letterbox) => (
               <Marker 
+                key={letterbox.id}
                 title={'Boîte ' + letterbox.id} 
-                description={'Description de la boîte'} 
-                coordinate={{ latitude : letterbox.latitude , longitude : letterbox.longitude }} 
+                description={letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()} 
+                coordinate={{ latitude : parseFloat(letterbox.latitude) , longitude : parseFloat(letterbox.longitude) }} 
               />
               ))}
 
