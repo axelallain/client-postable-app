@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import TopBar from '../components/TopBar'
 import auth from '@react-native-firebase/auth';
+import MapView, { Marker } from 'react-native-maps';
 
 const Home = props => {
 
@@ -33,7 +34,17 @@ const Home = props => {
     return (
       <View style={styles.container}>
           <TextInput style={styles.search} placeholder='Rechercher une boîte sur la carte' placeholderTextColor="#777"></TextInput>
-          <Image style={styles.map} source={require('../images/map.jpeg')} />
+          <MapView
+            style={styles.map}
+            region={{
+              latitude: 49.593255007450125,
+              longitude: -1.6860400241268962,
+              latitudeDelta: 0.010,
+              longitudeDelta: 0.010,
+            }}
+          >
+            <Marker coordinate={{ latitude : 49.593255007450125 , longitude : -1.6860400241268962 }} />
+          </MapView>
           <View style={styles.bottomBar}>
             <TouchableOpacity style={styles.TouchableOpacity}>
               <Image
