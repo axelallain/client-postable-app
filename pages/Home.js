@@ -9,6 +9,19 @@ const Home = props => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
+  const axios = require('axios');
+  const [letterboxes, setLetterboxes] = useState([])
+
+  const getLetterboxesFromApiAsync = async () => {
+    const response = await axios.get('http://192.168.1.17:8080/letterboxes', {
+      params: {
+        available: 'True'
+      }
+    });
+    setLetterboxes(response.data);
+    console.log(letterboxes);
+  }
+
   signOutFromGoogle = async () => {
     auth().signOut().then(() => console.log('User signed out!'));
   }
@@ -20,6 +33,7 @@ const Home = props => {
   }
 
   useEffect(() => {
+    getLetterboxesFromApiAsync();
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
@@ -34,6 +48,7 @@ const Home = props => {
     return (
       <View style={styles.container}>
           <TextInput style={styles.search} placeholder='Rechercher une boîte sur la carte' placeholderTextColor="#777"></TextInput>
+          
           <MapView
             style={styles.map}
             region={{
@@ -43,8 +58,16 @@ const Home = props => {
               longitudeDelta: 0.010,
             }}
           >
-            <Marker coordinate={{ latitude : 49.593255007450125 , longitude : -1.6860400241268962 }} />
+              { letterboxes.map((letterbox) => (
+              <Marker 
+                title={'Boîte ' + letterbox.id} 
+                description={'Description de la boîte'} 
+                coordinate={{ latitude : letterbox.latitude , longitude : letterbox.longitude }} 
+              />
+              ))}
+
           </MapView>
+
           <View style={styles.bottomBar}>
             <TouchableOpacity style={styles.TouchableOpacity}>
               <Image
