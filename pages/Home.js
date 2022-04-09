@@ -47,7 +47,6 @@ const Home = props => {
   } else {
     return (
       <View style={styles.container}>
-          <TextInput style={styles.search} placeholder='Rechercher une boîte sur la carte' placeholderTextColor="#777"></TextInput>
           
           <MapView
             style={styles.map}
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     },
 
     map: {
-        height: "80%",
+        height: "86%",
         width: "100%"
     },
 
