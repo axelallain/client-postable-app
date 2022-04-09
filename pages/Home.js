@@ -33,9 +33,16 @@ const Home = props => {
   }
 
   useEffect(() => {
-    getLetterboxesFromApiAsync();
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
+  }, []);
+
+  useEffect(() => {
+    getLetterboxesFromApiAsync();
+    const interval = setInterval(() => getLetterboxesFromApiAsync(), 1000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   if (initializing) return null;
