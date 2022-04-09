@@ -39,7 +39,7 @@ const Home = props => {
 
   useEffect(() => {
     getLetterboxesFromApiAsync();
-    const interval = setInterval(() => getLetterboxesFromApiAsync(), 1000);
+    const interval = setInterval(() => getLetterboxesFromApiAsync(), 100);
     return () => {
       clearInterval(interval);
     };
@@ -57,12 +57,6 @@ const Home = props => {
           
           <MapView
             style={styles.map}
-            region={{
-              latitude: 49.593255007450125,
-              longitude: -1.6860400241268962,
-              latitudeDelta: 0.2,
-              longitudeDelta: 0.2,
-            }}
           >
               { letterboxes.map((letterbox) => (
               <Marker 
