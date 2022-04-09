@@ -28,7 +28,7 @@ function App() {
       <Navigator>
         <Screen name='Login' component={Login} options={{ headerShown: false }} />
           <Screen name='Home' component={Home} options={{ 
-            title: 'Postable.', 
+            title: 'Carte des boîtes', 
             headerBackVisible: false, 
             gestureEnabled: false }} />
           <Screen name='Rents' component={Rents} options={{ title: 'Mes locations', headerBackVisible: false }} />

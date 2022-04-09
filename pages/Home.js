@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
+import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity, Button} from 'react-native'
 import TopBar from '../components/TopBar'
 import auth from '@react-native-firebase/auth';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Callout, Marker } from 'react-native-maps';
 
 const Home = props => {
 
@@ -13,11 +13,7 @@ const Home = props => {
   const [letterboxes, setLetterboxes] = useState([])
 
   const getLetterboxesFromApiAsync = async () => {
-    const response = await axios.get('http://192.168.1.17:8080/letterboxes', {
-      params: {
-        available: 'True'
-      }
-    });
+    const response = await axios.get('http://192.168.1.17:8080/letterboxesall');
     setLetterboxes(response.data);
     console.log(letterboxes);
   }
@@ -62,9 +58,14 @@ const Home = props => {
               <Marker 
                 key={letterbox.id}
                 title={'Boîte ' + letterbox.id} 
-                description={letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()} 
                 coordinate={{ latitude : parseFloat(letterbox.latitude) , longitude : parseFloat(letterbox.longitude) }} 
-              />
+              >
+                <Callout tooltip style={styles.callout}>
+                  <Text>{letterbox.available ? 'Cette boîte est disponible !' : "Indisponible jusqu'au 31 février."}</Text>
+                  <Text>{'Boîte ' + letterbox.id}</Text>
+                  <Text>{letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
+                </Callout>
+              </Marker>
               ))}
 
           </MapView>
@@ -116,6 +117,12 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'flex-start',
       paddingTop: "0%"
+    },
+
+    callout: {
+      backgroundColor: 'white',
+      padding: 15,
+      borderWidth: 0.5
     },
 
     name: {
