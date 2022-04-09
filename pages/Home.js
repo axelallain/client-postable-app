@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     },
 
     map: {
-        height: "86%",
+        height: "85.5%",
         width: "100%"
     },
 
