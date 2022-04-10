@@ -31,6 +31,7 @@ function App() {
             title: 'Carte des boîtes', 
             headerBackVisible: false, 
             gestureEnabled: false }} />
+          <Screen name='CreateRent' component={CreateRent} options={{ title: 'Paramétrer la location', headerBackTitle: 'Retour' }}/>
           <Screen name='Rents' component={Rents} options={{ title: 'Mes locations', headerBackVisible: false }} />
           <Screen name='ExpiredRents' component={ExpiredRents} options={{ title: 'Locations expirées', headerBackTitle: 'Retour' }} />
           <Screen name="RentPage" component={RentPage} options={{ title: 'Détails', headerBackTitle: 'Retour' }} />

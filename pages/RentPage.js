@@ -79,8 +79,6 @@ const RentPage = props => {
                     }}
                 >
                     <Marker 
-                        title={'Boîte ' + props.route.params.letterbox_id} 
-                        description={'Description de la boîte'} 
                         coordinate={{ latitude : parseFloat(props.route.params.letterbox_latitude) , longitude : parseFloat(props.route.params.letterbox_longitude) }} 
                     />
 
@@ -110,8 +108,6 @@ const RentPage = props => {
                     }}
                 >
                     <Marker 
-                        title={'Boîte ' + props.route.params.letterbox_id} 
-                        description={'Description de la boîte'} 
                         coordinate={{ latitude : parseFloat(props.route.params.letterbox_latitude) , longitude : parseFloat(props.route.params.letterbox_longitude) }} 
                     />
 

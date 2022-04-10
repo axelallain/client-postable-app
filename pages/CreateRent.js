@@ -2,39 +2,52 @@ import React from 'react'
 import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import TopBar from '../components/TopBar'
 import { Slider } from "@miblanchard/react-native-slider";
+import MapView, { Marker } from 'react-native-maps';
 
-export default class CreateRent extends React.Component {
+const CreateRent = props => {
     state = {
         minValue: 3,
-        maxValue: 7
+        maxValue: 7,
+        value: 0
       };
 
-  render() {
-    return (
-      <View style={styles.container}>
-          <TopBar />
-          <Text style={styles.title}>Louer la letterbox ID</Text>
-          <TouchableOpacity style={styles.TouchableOpacity}>
-              <Text style={styles.buttonsText}>
-              {`Letterbox ID
-Adresse
-Ville, Pays
+  return (
+    <View style={styles.container}>
+        <TouchableOpacity style={styles.TouchableOpacity}>
+            <Text>{props.route.params.letterbox_available ? 'Cette boîte est disponible !' : "Indisponible jusqu'au 31 février."}</Text>
+            <Text style={styles.buttonsText}>Boîte {props.route.params.letterbox_id}</Text>
+            <Text style={styles.buttonsText}>{props.route.params.letterbox_address.toUpperCase()}</Text>
+            <Text style={styles.buttonsText}>{props.route.params.letterbox_city.toUpperCase()}, {props.route.params.letterbox_country.toUpperCase()}</Text>
+        </TouchableOpacity>
 
-Du 01-01-22 au 08-01-22 à 10h10`}
-              </Text>
-          </TouchableOpacity>
-          <Slider
+        <MapView
+            style={styles.map}
+            region={{
+            latitude: parseFloat(props.route.params.letterbox_latitude),
+            longitude: parseFloat(props.route.params.letterbox_longitude),
+            latitudeDelta: 0.010,
+            longitudeDelta: 0.010,
+            }}
+        >
+            <Marker 
+                coordinate={{ latitude : parseFloat(props.route.params.letterbox_latitude) , longitude : parseFloat(props.route.params.letterbox_longitude) }} 
+            />
+
+        </MapView>
+
+        <Text style={styles.resume}>Choisir une durée de location :</Text>
+
+        <Slider
           minimumValue={this.state.minValue}
           maximumValue={this.state.maxValue}
           value={this.state.minValue}
           onValueChange={value => this.setState({ value })}
         />
-          
-          <Text style={styles.resume}>{this.state.value} jours : 0.00€</Text>
-          <TouchableOpacity style={styles.submitButton}><Text style={styles.submitText}>VALIDER LA LOCATION</Text></TouchableOpacity>
-      </View>
-    );
-  }
+        <Text style={styles.resume}>{this.state.value} jours : 0.00€</Text>
+
+        <TouchableOpacity style={styles.submitButton}><Text style={styles.submitText}>PAYER ET VALIDER LA LOCATION</Text></TouchableOpacity>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -44,7 +57,12 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      paddingTop: "2%"
+    },
+
+    map: {
+      height: "40%",
+      width: "100%",
+      borderWidth: 0.2
     },
 
     title: {
@@ -58,19 +76,19 @@ const styles = StyleSheet.create({
     },
 
     TouchableOpacity: {
-        backgroundColor: 'white',
-        paddingTop: "4%",
-        paddingRight: "10%",
-        paddingBottom: "4%",
-        paddingLeft: "10%",
-        borderRadius: 8,
-        marginTop: "8%",
-        marginBottom: "0%",
-        shadowColor: '#171717',
-        shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.1,
-        shadowRadius: 3
-    },
+      backgroundColor: 'white',
+      paddingTop: "4%",
+      paddingRight: "10%",
+      paddingBottom: "4%",
+      paddingLeft: "10%",
+      marginTop: "0%",
+      marginBottom: "0%",
+      width: "100%",
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.1,
+      shadowRadius: 3
+  },
 
     resume: {
 
@@ -79,9 +97,9 @@ const styles = StyleSheet.create({
     submitButton: {
         backgroundColor: '#42CF02',
         paddingTop: "5%",
-        paddingRight: "20%",
+        paddingRight: "12%",
         paddingBottom: "5%",
-        paddingLeft: "20%",
+        paddingLeft: "12%",
         borderRadius: 8,
         marginTop: "5%",
         marginBottom: "0%",
@@ -97,3 +115,5 @@ const styles = StyleSheet.create({
     }
 
 });
+
+export default CreateRent;

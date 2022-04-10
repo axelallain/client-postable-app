@@ -60,11 +60,32 @@ const Home = props => {
                 title={'Boîte ' + letterbox.id} 
                 coordinate={{ latitude : parseFloat(letterbox.latitude) , longitude : parseFloat(letterbox.longitude) }} 
               >
+                
+                { letterbox.available ?
+                <Callout tooltip style={styles.callout}>
+                  <Text>{letterbox.available ? 'Cette boîte est disponible !' : "Indisponible jusqu'au 31 février."}</Text>
+                  <Text>{'Boîte ' + letterbox.id}</Text>
+                  <Text>{letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
+                  <Button onPress={() => props.navigation.push('CreateRent', { 
+                  username: props.route.params.username, 
+                  letterbox_id:letterbox.id,
+                  letterbox_address:letterbox.address,
+                  letterbox_city:letterbox.city,
+                  letterbox_country:letterbox.country,
+                  letterbox_status:letterbox.status,
+                  letterbox_latitude:letterbox.latitude,
+                  letterbox_longitude:letterbox.longitude,
+                  letterbox_available:letterbox.available
+                  })} 
+                  title="Louer cette boîte" />
+                </Callout>
+                :
                 <Callout tooltip style={styles.callout}>
                   <Text>{letterbox.available ? 'Cette boîte est disponible !' : "Indisponible jusqu'au 31 février."}</Text>
                   <Text>{'Boîte ' + letterbox.id}</Text>
                   <Text>{letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
                 </Callout>
+                }
               </Marker>
               ))}
 
@@ -122,7 +143,8 @@ const styles = StyleSheet.create({
     callout: {
       backgroundColor: 'white',
       padding: 15,
-      borderWidth: 0.5
+      borderWidth: 0.5,
+      borderRadius: 10
     },
 
     name: {
