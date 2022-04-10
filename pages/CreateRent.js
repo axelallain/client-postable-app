@@ -43,9 +43,13 @@ const CreateRent = props => {
           value={this.state.minValue}
           onValueChange={value => this.setState({ value })}
         />
-        <Text style={styles.resume}>{this.state.value} jours : 0.00€</Text>
+        <Text style={styles.resume}>{this.state.value} jours : 0.00 €</Text>
 
+        { props.route.params.letterbox_available ? 
         <TouchableOpacity style={styles.submitButton}><Text style={styles.submitText}>PAYER ET VALIDER LA LOCATION</Text></TouchableOpacity>
+        :
+        <TouchableOpacity disabled={true} style={styles.submitButtonExpired}><Text style={styles.submitText}>CETTE BOÎTE VIENT D'ÊTRE LOUÉE</Text></TouchableOpacity>
+        }
     </View>
   );
 }
@@ -108,6 +112,21 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 3
     },
+
+    submitButtonExpired: {
+      backgroundColor: 'grey',
+      paddingTop: "5%",
+      paddingRight: "12%",
+      paddingBottom: "5%",
+      paddingLeft: "12%",
+      borderRadius: 8,
+      marginTop: "5%",
+      marginBottom: "0%",
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.1,
+      shadowRadius: 3
+  },
 
     submitText: {
         color: 'white',
