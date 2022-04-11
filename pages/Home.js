@@ -13,9 +13,13 @@ const Home = props => {
   const [letterboxes, setLetterboxes] = useState([])
 
   const getLetterboxesFromApiAsync = async () => {
-    const response = await axios.get('http://192.168.1.17:8080/letterboxesall');
-    setLetterboxes(response.data);
-    console.log(letterboxes);
+    const response = await axios.get('http://192.168.1.17:8080/letterboxesall')
+    .then((response) => {
+      setLetterboxes(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   signOutFromGoogle = async () => {
