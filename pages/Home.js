@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     callout: {
       backgroundColor: 'white',
       padding: 15,
-      borderWidth: 0.5,
+      borderWidth: 0.4,
       borderRadius: 10
     },
 

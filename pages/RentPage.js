@@ -66,8 +66,8 @@ const RentPage = props => {
                     <Text style={styles.buttonsText}>Boîte {props.route.params.letterbox_id}</Text>
                     <Text style={styles.buttonsText}>{props.route.params.letterbox_address.toUpperCase()}</Text>
                     <Text style={styles.buttonsText}>{props.route.params.letterbox_city.toUpperCase()}, {props.route.params.letterbox_country.toUpperCase()}</Text>
-                    <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
-                    <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
+                    <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à HH:mm')}</Text>
+                    <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à HH:mm')}</Text>
                 </TouchableOpacity>
                 <MapView
                     style={styles.mapExpired}
@@ -94,8 +94,8 @@ const RentPage = props => {
                 <Text style={styles.buttonsText}>Boîte {props.route.params.letterbox_id}</Text>
                 <Text style={styles.buttonsText}>{props.route.params.letterbox_address.toUpperCase()}</Text>
                 <Text style={styles.buttonsText}>{props.route.params.letterbox_city.toUpperCase()}, {props.route.params.letterbox_country.toUpperCase()}</Text>
-                <Text style={styles.buttonsText}>Depuis le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
-                <Text style={styles.buttonsText}>Expiration le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
+                <Text style={styles.buttonsText}>Depuis le : {Moment(rent.startingDate).format('DD-MM-Y à HH:mm')}</Text>
+                <Text style={styles.buttonsText}>Expiration le : {Moment(rent.endingDate).format('DD-MM-Y à HH:mm')}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => showConfirmDialog()}><Text style={styles.delete}>Mettre fin à cette location</Text></TouchableOpacity>
             <MapView

@@ -3,11 +3,35 @@ import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-
 import TopBar from '../components/TopBar'
 import Slider from '@react-native-community/slider';
 import MapView, { Marker } from 'react-native-maps';
+import Moment from 'moment';
+import 'moment/locale/fr';
 
 const CreateRent = props => {
 
+  Moment.locale('fr');
+
   const [total, setTotal] = useState({ days: 3, price: 0.20 });
+  var currentDate = new Date();
   
+  const submitRentCreate = async () => {
+    const json = JSON.stringify({ 
+      username: props.route.params.username, 
+      status: 'ongoing', 
+      letterbox_id: props.route.params.letterbox_id, 
+      days: total.days 
+    });
+    const res = await axios.post('http://192.168.1.17:8080/rents', json, {
+      headers: {
+        // Overwrite Axios's automatically set Content-Type
+        'Content-Type': 'application/json'
+      }
+    });
+
+    res.data.data; // '{"answer":42}'
+    res.data.headers['Content-Type']; // 'application/json',
+
+    props.navigation.navigate('Rents', { username: props.route.params.username });
+  }
 
   return (
     <View style={styles.container}>
@@ -43,9 +67,10 @@ const CreateRent = props => {
           step={1}
         />
         <Text style={styles.resume}>{total.days} jours pour {total.price} €</Text>
+        <Text style={styles.expirationDate}>Soit jusqu'au {Moment(currentDate.setDate(currentDate.getDate() + total.days)).format('DD MMMM YYYY à HH:mm')}</Text>
 
         { props.route.params.letterbox_available ? 
-        <TouchableOpacity style={styles.submitButton}><Text style={styles.submitText}>PAYER ET VALIDER LA LOCATION</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => submitRentCreate()} style={styles.submitButton}><Text style={styles.submitText}>PAYER ET VALIDER LA LOCATION</Text></TouchableOpacity>
         :
         <TouchableOpacity disabled={true} style={styles.submitButtonExpired}><Text style={styles.submitText}>CETTE BOÎTE VIENT D'ÊTRE LOUÉE</Text></TouchableOpacity>
         }
@@ -102,6 +127,10 @@ const styles = StyleSheet.create({
 
     sliderTitle: {
       marginBottom: "4%",
+      fontSize: 15
+    },
+
+    expirationDate: {
       fontSize: 15
     },
 

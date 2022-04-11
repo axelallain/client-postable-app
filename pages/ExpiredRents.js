@@ -46,8 +46,8 @@ const ExpiredRents = props => {
                 <Text style={styles.buttonsText}>Boîte {rent.letterbox.id}</Text>
                 <Text style={styles.buttonsText}>{rent.letterbox.address.toUpperCase()}</Text>
                 <Text style={styles.buttonsText}>{rent.letterbox.city.toUpperCase()}, {rent.letterbox.country.toUpperCase()}</Text>
-                <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à hh:mm')}</Text>
-                <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à hh:mm')}</Text>
+                <Text style={styles.buttonsText}>Louée le : {Moment(rent.startingDate).format('DD-MM-Y à HH:mm')}</Text>
+                <Text style={styles.buttonsText}>Expirée le : {Moment(rent.endingDate).format('DD-MM-Y à HH:mm')}</Text>
             </TouchableOpacity>
             ))}
             
