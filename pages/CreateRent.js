@@ -33,16 +33,16 @@ const CreateRent = props => {
 
         </MapView>
 
-        <Text style={styles.resume}>Choisir une durée de location :</Text>
+        <Text style={styles.sliderTitle}>Choisir une durée de location :</Text>
 
         <Slider
-          style={{ width: 250, height: 40 }}
+          style={styles.slider}
           minimumValue={3}
           maximumValue={7}
           onValueChange={value => setTotal({ days: value, price: value * 0.25 })}
           step={1}
         />
-        <Text style={styles.resume}>{total.days} jours : {total.price} €</Text>
+        <Text style={styles.resume}>{total.days} jours pour {total.price} €</Text>
 
         { props.route.params.letterbox_available ? 
         <TouchableOpacity style={styles.submitButton}><Text style={styles.submitText}>PAYER ET VALIDER LA LOCATION</Text></TouchableOpacity>
@@ -65,7 +65,14 @@ const styles = StyleSheet.create({
     map: {
       height: "40%",
       width: "100%",
-      borderWidth: 0.2
+      borderWidth: 0.2,
+      marginBottom: "10%"
+    },
+
+    slider: {
+      width: 250,
+      height: 40,
+      marginBottom: "15%"
     },
 
     title: {
@@ -91,10 +98,17 @@ const styles = StyleSheet.create({
       shadowOffset: {width: -2, height: 4},
       shadowOpacity: 0.1,
       shadowRadius: 3
-  },
+    },
+
+    sliderTitle: {
+      marginBottom: "4%",
+      fontSize: 15
+    },
 
     resume: {
-
+      marginBottom: "5%",
+      fontWeight: 'bold',
+      fontSize: 17
     },
 
     submitButton: {
