@@ -1,15 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import TopBar from '../components/TopBar'
-import { Slider } from "@miblanchard/react-native-slider";
+import Slider from '@react-native-community/slider';
 import MapView, { Marker } from 'react-native-maps';
 
 const CreateRent = props => {
-    state = {
-        minValue: 3,
-        maxValue: 7,
-        value: 0
-      };
+
+  const [total, setTotal] = useState({ days: 3, price: 0.20 });
+  
 
   return (
     <View style={styles.container}>
@@ -38,12 +36,13 @@ const CreateRent = props => {
         <Text style={styles.resume}>Choisir une durée de location :</Text>
 
         <Slider
-          minimumValue={this.state.minValue}
-          maximumValue={this.state.maxValue}
-          value={this.state.minValue}
-          onValueChange={value => this.setState({ value })}
+          style={{ width: 250, height: 40 }}
+          minimumValue={3}
+          maximumValue={7}
+          onValueChange={value => setTotal({ days: value, price: value * 0.25 })}
+          step={1}
         />
-        <Text style={styles.resume}>{this.state.value} jours : 0.00 €</Text>
+        <Text style={styles.resume}>{total.days} jours : {total.price} €</Text>
 
         { props.route.params.letterbox_available ? 
         <TouchableOpacity style={styles.submitButton}><Text style={styles.submitText}>PAYER ET VALIDER LA LOCATION</Text></TouchableOpacity>
