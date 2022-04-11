@@ -10,6 +10,8 @@ const CreateRent = props => {
 
   Moment.locale('fr');
 
+  const axios = require('axios');
+
   const [total, setTotal] = useState({ days: 3, price: 0.20 });
   var currentDate = new Date();
   
@@ -22,13 +24,9 @@ const CreateRent = props => {
     });
     const res = await axios.post('http://192.168.1.17:8080/rents', json, {
       headers: {
-        // Overwrite Axios's automatically set Content-Type
         'Content-Type': 'application/json'
       }
-    });
-
-    res.data.data; // '{"answer":42}'
-    res.data.headers['Content-Type']; // 'application/json',
+    }).then((response) => console.log(response));
 
     props.navigation.navigate('Rents', { username: props.route.params.username });
   }
