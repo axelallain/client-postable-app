@@ -10,7 +10,8 @@ const Account = props => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  signOutFromGoogle = async () => {
+  // Removing the async from this function fixed the ForwardRef warning on Login page.
+  function signOutFromGoogle() {
     auth().signOut().then(() => console.log('User signed out!'));
     props.navigation.navigate('Login');
   }

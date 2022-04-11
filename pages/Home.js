@@ -42,6 +42,7 @@ const Home = props => {
     const interval = setInterval(() => getLetterboxesFromApiAsync(), 100);
     return () => {
       clearInterval(interval);
+      setLetterboxes([]);
     };
   }, []);
 
