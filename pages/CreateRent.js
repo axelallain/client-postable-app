@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     slider: {
       width: 250,
       height: 40,
-      marginBottom: "15%"
+      marginBottom: "7%"
     },
 
     title: {
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         paddingBottom: "5%",
         paddingLeft: "12%",
         borderRadius: 8,
-        marginTop: "5%",
+        marginTop: "10%",
         marginBottom: "0%",
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
