@@ -3,8 +3,12 @@ import {Image, TextInput, Text, View, StyleSheet, TouchableOpacity, Button} from
 import TopBar from '../components/TopBar'
 import auth from '@react-native-firebase/auth';
 import MapView, { Callout, Marker } from 'react-native-maps';
+import Moment from 'moment';
+import 'moment/locale/fr';
 
 const Home = props => {
+
+  Moment.locale('fr');
 
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
@@ -68,7 +72,7 @@ const Home = props => {
                 
                 { letterbox.available ?
                 <Callout tooltip style={styles.callout}>
-                  <Text>{letterbox.available ? 'Cette boîte est disponible !' : "Indisponible jusqu'au 31 février."}</Text>
+                  <Text>Cette boîte est disponible !</Text>
                   <Text>{'Boîte ' + letterbox.id}</Text>
                   <Text>{letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
                   <Button onPress={() => props.navigation.push('CreateRent', { 
@@ -86,7 +90,11 @@ const Home = props => {
                 </Callout>
                 :
                 <Callout tooltip style={styles.callout}>
-                  <Text>{letterbox.available ? 'Cette boîte est disponible !' : "Indisponible jusqu'au 31 février."}</Text>
+                  { letterbox.rents.find(rent => rent.status === "ongoing") ?
+                    <Text>Indisponible jusqu'au {Moment(letterbox.rents.find(rent => rent.status === "ongoing").endingDate).format('DD MMMM YYYY à HH:mm')}</Text>
+                    :
+                    <Text>Indisponible</Text>
+                  }
                   <Text>{'Boîte ' + letterbox.id}</Text>
                   <Text>{letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
                 </Callout>
