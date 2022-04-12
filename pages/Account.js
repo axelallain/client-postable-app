@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       width: '100%',
       height: '30%',
-      marginTop: '144.5%'
+      marginTop: '144.7%'
     },
 
     bottomBarButtons: {

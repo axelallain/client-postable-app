@@ -40,9 +40,8 @@ const Rents = props => {
 
   if(rents.length > 0) {
     return (
-      <ScrollView style={styles.container}>
         <View style={styles.scrollView}>
-            { rents.map((rent) => (
+            { rents.slice(0, 3).map((rent) => (
 
             <TouchableOpacity key={rent.id} onPress={() => props.navigation.push('RentPage', { 
               username: props.route.params.username, 
@@ -64,6 +63,10 @@ const Rents = props => {
               <Text style={styles.buttonsText}>Expiration le : {Moment(rent.endingDate).format('DD-MM-Y à HH:mm')}</Text>
             </TouchableOpacity>
             ))}
+
+            <TouchableOpacity onPress={() => props.navigation.push('ExpiredRents', { username: props.route.params.username })} style={styles.TouchableOpacity}>
+              <Text style={styles.expiredButtonText}>Voir toutes les locations expirées</Text>
+            </TouchableOpacity>
 
             <View style={styles.bottomBar}>
               <TouchableOpacity onPress={() => props.navigation.navigate('Home', { username: props.route.params.username })} style={styles.bottomBarButtons}>
@@ -100,15 +103,17 @@ const Rents = props => {
               </TouchableOpacity>
             </View>
         </View>
-      </ScrollView>
     );
   }
 
   if(rents.length <= 0) {
     return (
       <View style={styles.container}>
-          <TouchableOpacity style={styles.ongoingRent}>
+          <TouchableOpacity style={styles.emptyTouchable}>
             <Text style={styles.activeRentTextEmpty}>Aucune location en cours</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.emptyTouchable}>
+            <Text style={styles.expiredRentTextEmpty}>Aucune location expirée</Text>
           </TouchableOpacity>
 
           <View style={styles.bottomBarExpired}>
@@ -154,21 +159,9 @@ const styles = StyleSheet.create({
     bottomBar: {
       display: 'flex',
       flexDirection: 'row',
-      width: '100%',
-      height: '5%',
-      marginTop: '0%',
-    },
-
-    scrollView: {
-      width: "100%"
-    },
-
-    container: {
-      height: "100%",
-      backgroundColor: '#f2f2f2',
-      flexDirection: 'column',
-      paddingTop: "0%",
-      flex: 1
+      height: '15%',
+      marginTop: '11.8%',
+      width: "100%",
     },
 
     bottomBarExpired: {
@@ -176,7 +169,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       width: '100%',
       height: '30%',
-      marginTop: '131%'
+      marginTop: '139.1%'
     },
 
     bottomBarButtons: {
@@ -217,15 +210,17 @@ const styles = StyleSheet.create({
       fontWeight: 'bold'
     },
 
+    expiredRentTextEmpty: {
+      color: 'red',
+      marginTop: "0.4%",
+      marginBottom: "0.4%",
+      fontWeight: 'bold',
+    },
+
     buttonsText: {
       color: 'black',
       marginTop: "0.4%",
       marginBottom: "0.4%"
-    },
-
-    expiredButtonText: {
-        color: 'black',
-        fontWeight: 'bold'
     },
 
     ongoingRent: {
@@ -236,6 +231,21 @@ const styles = StyleSheet.create({
       paddingLeft: "10%",
       marginTop: "0%",
       marginBottom: "3%",
+      width: "100%",
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.1,
+      shadowRadius: 3
+    },
+
+    emptyTouchable: {
+      backgroundColor: 'white',
+      paddingTop: "4%",
+      paddingRight: "10%",
+      paddingBottom: "4%",
+      paddingLeft: "10%",
+      marginTop: "0%",
+      marginBottom: "0%",
       width: "100%",
       shadowColor: '#171717',
       shadowOffset: {width: -2, height: 4},
@@ -259,18 +269,23 @@ const styles = StyleSheet.create({
     },
 
     TouchableOpacity: {
-        backgroundColor: 'white',
-        paddingTop: "4%",
-        paddingRight: "16%",
-        paddingBottom: "4%",
-        paddingLeft: "16%",
-        borderRadius: 8,
-        marginTop: "8%",
-        marginBottom: "0%",
-        shadowColor: '#171717',
-        shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.1,
-        shadowRadius: 3
+      backgroundColor: 'white',
+      paddingTop: "4%",
+      paddingBottom: "4%",
+      borderRadius: 8,
+      marginTop: "7%",
+      marginBottom: "0%",
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.1,
+      shadowRadius: 3,
+      width: '100%',
+    },
+
+    expiredButtonText: {
+      color: 'black',
+      fontWeight: 'bold',
+      textAlign: 'center'
     }
 
 });

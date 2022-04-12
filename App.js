@@ -32,8 +32,9 @@ function App() {
             headerBackVisible: false, 
             gestureEnabled: false }} />
           <Screen name='CreateRent' component={CreateRent} options={{ title: 'Paramétrer la location', headerBackTitle: 'Retour' }}/>
-          <Screen name='Rents' component={Rents} options={{ title: 'Mes locations', headerBackTitle: 'Retour' }} />
+          <Screen name='Rents' component={Rents} options={{ title: 'Mes locations', headerBackVisible: false }} />
           <Screen name="RentPage" component={RentPage} options={{ title: 'Détails', headerBackTitle: 'Retour' }} />
+          <Screen name="ExpiredRents" component={ExpiredRents} options={{ title: 'Locations expirées', headerBackTitle: 'Retour' }} />
           <Screen name="Account" component={Account} options={{ title: 'Mon compte', headerBackVisible: false }} />
       </Navigator>
     </NavigationContainer>
