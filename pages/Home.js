@@ -72,9 +72,10 @@ const Home = props => {
                 
                 { letterbox.available ?
                 <Callout tooltip style={styles.callout}>
-                  <Text>Cette boîte est disponible !</Text>
-                  <Text>{'Boîte ' + letterbox.id}</Text>
-                  <Text>{letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
+                  <Text style={{ color: 'green', fontWeight: 'bold' }}>Cette boîte est disponible !</Text>
+                  <Text style={{ paddingTop: 10 }}>{'Boîte ' + letterbox.id}</Text>
+                  <Text>{letterbox.address.toUpperCase()}</Text>
+                  <Text style={{ paddingBottom: 6 }}>{letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
                   <Button onPress={() => props.navigation.push('CreateRent', { 
                   username: props.route.params.username, 
                   letterbox_id:letterbox.id,
@@ -90,9 +91,10 @@ const Home = props => {
                 </Callout>
                 :
                 <Callout tooltip style={styles.callout}>
-                  <Text>Indisponible</Text>
-                  <Text>{'Boîte ' + letterbox.id}</Text>
-                  <Text>{letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
+                  <Text style={{ color: 'red', fontWeight: 'bold' }}>Indisponible</Text>
+                  <Text style={{ paddingTop: 10 }}>{'Boîte ' + letterbox.id}</Text>
+                  <Text>{letterbox.address.toUpperCase()}</Text>
+                  <Text>{letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
                 </Callout>
                 }
               </Marker>
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     },
 
     map: {
-        height: "85.5%",
+        height: "85.6%",
         width: "100%"
     },
 
