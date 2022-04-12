@@ -90,11 +90,7 @@ const Home = props => {
                 </Callout>
                 :
                 <Callout tooltip style={styles.callout}>
-                  { letterbox.rents.find(rent => rent.status === "ongoing") ?
-                    <Text>Indisponible jusqu'au {Moment(letterbox.rents.find(rent => rent.status === "ongoing").endingDate).format('DD MMMM YYYY à HH:mm')}</Text>
-                    :
-                    <Text>Indisponible</Text>
-                  }
+                  <Text>Indisponible</Text>
                   <Text>{'Boîte ' + letterbox.id}</Text>
                   <Text>{letterbox.address.toUpperCase() + ", " + letterbox.postalCode + " " + letterbox.city.toUpperCase()}</Text>
                 </Callout>

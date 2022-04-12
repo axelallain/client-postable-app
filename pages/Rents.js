@@ -21,13 +21,22 @@ const Rents = props => {
         username: props.route.params.username,
         status: 'ongoing'
       }
+    })
+    .then((response) => {
+      setRents(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
     });
-    setRents(response.data);
-    console.log(rents);
   }
 
   useEffect(() => {
-    getRentsFromApiAsync()
+    getRentsFromApiAsync();
+    const interval = setInterval(() => getRentsFromApiAsync(), 100);
+    return () => {
+      clearInterval(interval);
+      setRents([]);
+    };
   }, []);
 
   if(rents.length > 0) {
@@ -197,6 +206,14 @@ const styles = StyleSheet.create({
       marginBottom: "5%"
     },
 
+    expiredRentText: {
+      color: 'red',
+      marginTop: "0.4%",
+      marginBottom: "0.4%",
+      fontWeight: 'bold',
+      marginBottom: "5%"
+    },
+
     activeRentTextEmpty: {
       color: 'green',
       marginTop: "0.4%",
@@ -228,7 +245,22 @@ const styles = StyleSheet.create({
       shadowOffset: {width: -2, height: 4},
       shadowOpacity: 0.1,
       shadowRadius: 3
-  },
+    },
+
+    expiredRent: {
+      backgroundColor: 'white',
+      paddingTop: "4%",
+      paddingRight: "10%",
+      paddingBottom: "4%",
+      paddingLeft: "10%",
+      marginTop: "0%",
+      marginBottom: "0%",
+      width: "100%",
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.1,
+      shadowRadius: 3
+    },
 
     TouchableOpacity: {
         backgroundColor: 'white',
