@@ -17,9 +17,13 @@ const ExpiredRents = props => {
         username: props.route.params.username,
         status: 'expired'
       }
+    })
+    .then((response) => {
+      setRents(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
     });
-    setRents(response.data);
-    console.log(rents);
   }
 
   useEffect(() => {

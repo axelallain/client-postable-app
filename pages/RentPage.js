@@ -13,9 +13,13 @@ const RentPage = props => {
     const [rent, setRent] = useState({})
 
     const getRentFromApiAsync = async () => {
-        const response = await axios.get('http://192.168.1.17:8080/rents/' + props.route.params.rent_id);
-        setRent(response.data);
-        console.log(rent);
+        const response = await axios.get('http://192.168.1.17:8080/rents/' + props.route.params.rent_id)
+        .then((response) => {
+            setRent(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 
     const lock = async () => {
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
         paddingBottom: "4%",
         paddingLeft: "10%",
         marginTop: "0%",
-        marginBottom: "10%",
+        marginBottom: "0%",
         width: "100%",
         shadowColor: '#171717',
         shadowOffset: {width: -2, height: 4},
@@ -179,7 +183,8 @@ const styles = StyleSheet.create({
     mapExpired: {
         height: "70%",
         width: "100%",
-        borderWidth: 0.2
+        borderWidth: 0.2,
+        marginBottom: "5%"
     },
 
     map: {
